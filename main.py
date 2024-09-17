@@ -28,19 +28,19 @@ async def start(message):
     print('Привет! Я бот помогающий твоему здоровью.')  # Задача "Бот поддержки (Начало)"
     await message.answer('Привет! Я бот помогающий твоему здоровью.')  # Задача "Он мне ответил!"
 
-@dp.message_handler(text='Calories')
+@dp.message_handler(text='Calories')  # Задача "Цепочка вопросов
 async def start_calories(message):
     await set_age(message)
 
-@dp.message_handler(state=UserState.age)
+@dp.message_handler(state=UserState.age)  # Задача "Цепочка вопросов
 async def continue_calories(message, state):
     await set_growth(message, state)
 
-@dp.message_handler(state=UserState.growth)
+@dp.message_handler(state=UserState.growth)  # Задача "Цепочка вопросов
 async def continue_calories(message, state):
     await set_weight(message, state)
 
-@dp.message_handler(state=UserState.weight)
+@dp.message_handler(state=UserState.weight)  # Задача "Цепочка вопросов
 async def complete_calories(message, state):
     await send_calories(message, state)
 
