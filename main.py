@@ -10,9 +10,11 @@ from aiogram import Bot, Dispatcher, executor, types
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from aiogram.dispatcher.filters.state import State, StatesGroup
 from aiogram.dispatcher import FSMContext
+from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 import asyncio
-from config import TELEGRAM_BOT_TOKEN
+from config import TELEGRAM_BOT_TOKEN, MY_ID
 from calorie_calculator import UserState, set_age, set_growth, set_weight, send_calories
+from exa_key import reply_markup
 
 api = TELEGRAM_BOT_TOKEN
 bot = Bot(token=api)
@@ -20,15 +22,16 @@ dp = Dispatcher(bot, storage=MemoryStorage())
 
 
 async def hello_start(_):  # функция для меня
-    await bot.send_message(chat_id='1327261756', text='Бот запущен')
+    await bot.send_message(chat_id=MY_ID, text='Бот запущен')
 
 
 @dp.message_handler(commands='start')
 async def start(message):
     print('Привет! Я бот помогающий твоему здоровью.')  # Задача "Бот поддержки (Начало)"
-    await message.answer('Привет! Я бот помогающий твоему здоровью.')  # Задача "Он мне ответил!"
+    await message.answer('Привет! Я бот помогающий твоему здоровью.', reply_markup=reply_markup)  # Задача "Он мне ответил!"
 
-@dp.message_handler(text='Calories')  # Задача "Цепочка вопросов
+
+@dp.message_handler(text='Рассчитать')  # Задача "Цепочка вопросов
 async def start_calories(message):
     await set_age(message)
 
