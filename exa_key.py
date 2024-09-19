@@ -9,7 +9,7 @@
 
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 
-kb = ReplyKeyboardMarkup
+kb = ReplyKeyboardMarkup()
 btCalc = KeyboardButton(text='Рассчитать')
 btInfo = KeyboardButton(text='Информация')
 kb.add(btCalc)
