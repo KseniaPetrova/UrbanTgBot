@@ -44,10 +44,18 @@ class UserState(StatesGroup):
     growth = State()
     weight = State()
 
-@dp.message_handler(text='Рассчитать')
-async def set_age(message):
-    await message.answer('Введите свой возраст:')
+# @dp.message_handler(text='Рассчитать')  # Задача "Цепочка вопросов"
+# async def set_age(message):
+#     await message.answer('Введите свой возраст:')
+#     await UserState.age.set()
+
+@dp.callback_query_handler(text='calories')  # Задача "Ещё больше выбора"
+async def set_age(call):
+    await call.message.answer('Введите свой возраст:')
     await UserState.age.set()
+    await call.answer()
+
+
 @dp.message_handler(state=UserState.age)
 async def set_growth(message, state):
     await state.update_data(age=int(message.text))
@@ -65,5 +73,5 @@ async def send_calories(message, state):
     await state.update_data(weight=int(message.text))
     data = await state.get_data()
     calcCalor = 10 * data['weight'] + 6.25 * data['growth'] - 5 * data['age'] - 161
-    await message.answer(f'Ваша норма калорий {calcCalor}' )
+    await message.answer(f'Ваша норма калорий {calcCalor:.0f}' )
     await state.finish()

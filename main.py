@@ -15,6 +15,7 @@ import asyncio
 from config import TELEGRAM_BOT_TOKEN, MY_ID
 from calorie_calculator import UserState, set_age, set_growth, set_weight, send_calories
 from exa_key import reply_markup
+from inline_key import inLineKb
 
 api = TELEGRAM_BOT_TOKEN
 bot = Bot(token=api)
@@ -31,9 +32,13 @@ async def start(message):
     await message.answer('Привет! Я бот помогающий твоему здоровью.', reply_markup=reply_markup)
 
 
-@dp.message_handler(text='Рассчитать')
-async def start_calories(message):
-    await set_age(message)
+# @dp.message_handler(text='Рассчитать')
+# async def start_calories(message):
+#     await set_age(message)
+
+@dp.callback_query_handler(text='calories')  # Задача "Ещё больше выбора"
+async def start_calories(call):
+    await set_age(call)
 
 @dp.message_handler(state=UserState.age)
 async def continue_calories(message, state):
@@ -46,6 +51,15 @@ async def continue_calories(message, state):
 @dp.message_handler(state=UserState.weight)
 async def complete_calories(message, state):
     await send_calories(message, state)
+
+@dp.message_handler(text='Рассчитать')  # Задача "Ещё больше выбора"
+async def main_menu(message):
+    await message.answer('Выберите опцию:', reply_markup=inLineKb)
+
+@dp.callback_query_handler(text='formulas')  # Задача "Ещё больше выбора"
+async def get_formulas(call):
+    await call.message.answer('10 x вес (кг) + 6,25 x рост (см) – 5 x возраст (г) – 161')
+    await call.answer()
 
 @dp.message_handler()
 async def all_massages(message):
