@@ -9,12 +9,10 @@
 
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 
-kb = ReplyKeyboardMarkup()
+kb = ReplyKeyboardMarkup(resize_keyboard=True)
 btCalc = KeyboardButton(text='Рассчитать')
 btInfo = KeyboardButton(text='Информация')
-kb.add(btCalc)
-kb.add(btInfo)
+btBuy = KeyboardButton(text='Купить')
 
-keyboard = [[btCalc], [btInfo]]
-
-reply_markup = ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
+kb.add(btCalc, btInfo)
+kb.add(btBuy)

@@ -30,8 +30,16 @@ inLineKb = InlineKeyboardMarkup(
     ]
 )
 
-
-
+inLineKbBuy = InlineKeyboardMarkup(
+    inline_keyboard=[
+        [
+            InlineKeyboardButton(text='Продукт 1', callback_data='product_buying'),
+            InlineKeyboardButton(text='Продукт 2', callback_data='product_buying'),
+            InlineKeyboardButton(text='Продукт 3', callback_data='product_buying'),
+            InlineKeyboardButton(text='Продукт 4', callback_data='product_buying')
+        ]
+    ]
+)
 
 
 

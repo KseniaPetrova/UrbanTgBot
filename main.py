@@ -12,10 +12,11 @@ from aiogram.dispatcher.filters.state import State, StatesGroup
 from aiogram.dispatcher import FSMContext
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 import asyncio
+import os
 from config import TELEGRAM_BOT_TOKEN, MY_ID
 from calorie_calculator import UserState, set_age, set_growth, set_weight, send_calories
-from exa_key import reply_markup
-from inline_key import inLineKb
+from exa_key import kb
+from inline_key import inLineKb, inLineKbBuy
 
 api = TELEGRAM_BOT_TOKEN
 bot = Bot(token=api)
@@ -29,7 +30,7 @@ async def hello_start(_):  # функция для меня
 @dp.message_handler(commands='start')
 async def start(message):
     print('Привет! Я бот помогающий твоему здоровью.')
-    await message.answer('Привет! Я бот помогающий твоему здоровью.', reply_markup=reply_markup)
+    await message.answer('Привет! Я бот помогающий твоему здоровью.', reply_markup=kb)
 
 
 # @dp.message_handler(text='Рассчитать')
@@ -59,6 +60,29 @@ async def main_menu(message):
 @dp.callback_query_handler(text='formulas')  # Задача "Ещё больше выбора"
 async def get_formulas(call):
     await call.message.answer('10 x вес (кг) + 6,25 x рост (см) – 5 x возраст (г) – 161')
+    await call.answer()
+
+@dp.message_handler(text='Купить')  # Задача "Витамины для всех!"
+async def get_buying_list(message):
+    products = [
+        ("Продукт 1", "Описание 1", 100, 'pictures/swanson-b-12-complex.jpg'),
+        ("Продукт 2", "Описание 2", 200, 'pictures/swanson-b-125-complex.jpg'),
+        ("Продукт 3", "Описание 3", 300, 'pictures/swanson-balance-b-100-complex.jpg'),
+        ("Продукт 4", "Описание 4", 400, 'pictures/swanson-vitamin-c-complex.jpg')
+    ]
+
+    for product in products:
+        product_name, description, price, image_path = product
+        with open(image_path, 'rb') as img:
+            await message.answer_photo(img,
+                                       f'Название: {product_name} | Описание: {description} | Цена: {price}')
+
+    await message.answer('Выберите продукт для покупки:', reply_markup=inLineKbBuy)
+
+
+@dp.callback_query_handler(text='product_buying')  # Задача "Витамины для всех!"
+async def send_confirm_message(call):
+    await call.message.answer("Вы успешно приобрели продукт!")
     await call.answer()
 
 @dp.message_handler()
