@@ -65,7 +65,7 @@ def get_all_products():
     return products_db
 
 def add_user(username, email, age):
-    cursor.execute("INSERT INTO Users (username, email, age, balance) VALUES (?, ?, ?)",
+    cursor.execute("INSERT INTO Users (username, email, age, balance) VALUES (?, ?, ?, ?)",
                    (f"{username}", f"{email}", f"{age}", "1000"))
     connection.commit()
 

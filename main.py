@@ -18,6 +18,7 @@ from calorie_calculator import UserState, set_age, set_growth, set_weight, send_
 from exa_key import kb
 from inline_key import inLineKb, inLineKbBuy
 from crud_functions import initiate_db, get_all_products
+from registration import RegistrationState, sing_up, set_username, set_email, set_age
 
 api = TELEGRAM_BOT_TOKEN
 bot = Bot(token=api)
@@ -67,7 +68,7 @@ async def get_formulas(call):
     await call.answer()
 
 @dp.message_handler(text='Купить')  # Задача "Витамины для всех!"
-async def get_buying_list(message):
+async def get_buying_list(message):   # Задача "Продуктовая база"
     # products = [
     #     ("Продукт 1", "Описание 1", 100, 'pictures/swanson-b-12-complex.jpg'),
     #     ("Продукт 2", "Описание 2", 200, 'pictures/swanson-b-125-complex.jpg'),
@@ -94,6 +95,25 @@ async def get_buying_list(message):
 async def send_confirm_message(call):
     await call.message.answer("Вы успешно приобрели продукт!")
     await call.answer()
+
+@dp.message_handler(text="Регистрация")  # Задача "Регистрация покупателей"
+async def start_registration(message):
+    await sing_up(message)
+
+@dp.message_handler(state=RegistrationState.username)  # Задача "Регистрация покупателей"
+async def continue_registration(message, state):
+    await set_username(message, state)
+
+@dp.message_handler(state=RegistrationState.email)  # Задача "Регистрация покупателей"
+async def continue_registration(message, state):
+    await set_email(message, state)
+
+@dp.message_handler(state=RegistrationState.age)  # Задача "Регистрация покупателей"
+async def complete_registration(message, state):
+    await set_age(message, state)
+
+
+
 
 @dp.message_handler()
 async def all_massages(message):

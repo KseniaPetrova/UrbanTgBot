@@ -46,29 +46,44 @@ from aiogram.dispatcher.filters.state import State, StatesGroup
 from aiogram.dispatcher import FSMContext
 import asyncio
 from config import TELEGRAM_BOT_TOKEN
-from crud_functions import is_included
+from crud_functions import is_included, add_user
 
 api = TELEGRAM_BOT_TOKEN
 bot = Bot(token=api)
 dp = Dispatcher(bot, storage=MemoryStorage())
 
-class RegistrationState (StatesGroup):
+class RegistrationState(StatesGroup):
     username = State()
     email = State()
     age = State()
 
 @dp.message_handler(text="Регистрация")
-async def sing_up(message):
+async def sing_up(message :types.Message):
     await message.answer("Введите имя пользователя (только латинский алфавит):")
     await RegistrationState.username.set()
 
 @dp.message_handler(state=RegistrationState.username)
-async def set_username(message, state):
+async def set_username(message :types.Message, state :FSMContext):
+    if is_included(message.text):
+        await message.answer('Пользователь существует, введите другое имя')
+    else:
+        await state.update_data(username=message.text)
+        await message.answer('Введите свой email:')
+        await RegistrationState.email.set()
 
+@dp.message_handler(state=RegistrationState.email)
+async def set_email(message :types.Message, state :FSMContext):
+    await state.update_data(email=message.text)
+    await message.answer("Введите свой возраст:")
+    await RegistrationState.age.set()
 
-
-
-
+@dp.message_handler(state=RegistrationState.age)
+async def set_age(message :types.Message, state :FSMContext):
+    await state.update_data(age=message.text)
+    user_data = await state.get_data()
+    add_user(user_data['username'], user_data['email'], user_data['age'])
+    await message.answer('Вы успешно зарегистрированы!')
+    await state.finish()
 
 
 
