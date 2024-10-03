@@ -13,6 +13,8 @@ kb = ReplyKeyboardMarkup(resize_keyboard=True)
 btCalc = KeyboardButton(text='Рассчитать')
 btInfo = KeyboardButton(text='Информация')
 btBuy = KeyboardButton(text='Купить')
+btReg = KeyboardButton(text='Регистрация')
 
+kb.add(btReg)
 kb.add(btCalc, btInfo)
 kb.add(btBuy)

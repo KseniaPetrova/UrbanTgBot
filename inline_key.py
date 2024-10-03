@@ -33,7 +33,7 @@ inLineKb = InlineKeyboardMarkup(
 inLineKbBuy = InlineKeyboardMarkup(
     inline_keyboard=[
         [
-            InlineKeyboardButton(text='Продукт 1', callback_data='product_buying'),
+            InlineKeyboardButton(text='Продукт 1', callback_data='гыукы'),
             InlineKeyboardButton(text='Продукт 2', callback_data='product_buying'),
             InlineKeyboardButton(text='Продукт 3', callback_data='product_buying'),
             InlineKeyboardButton(text='Продукт 4', callback_data='product_buying')
@@ -41,7 +41,16 @@ inLineKbBuy = InlineKeyboardMarkup(
     ]
 )
 
-
+admin_panel = InlineKeyboardMarkup(
+    inline_keyboard=[
+        [InlineKeyboardButton(text='Пользователи', callback_data='product_buying')],
+        [InlineKeyboardButton(text='Статистика', callback_data='stat')],
+        [
+            InlineKeyboardButton(text='Блокировка', callback_data='blovk'),
+            InlineKeyboardButton(text='Разблокировка', callback_data='unblovk'),
+        ]
+    ]
+)
 
 
 

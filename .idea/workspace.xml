@@ -5,10 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8bc15999-34ee-401b-8caf-261d9cd3930d" name="Changes" comment="work">
-      <change afterPath="$PROJECT_DIR$/pictures/swanson-b-12-complex.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pictures/swanson-b-125-complex.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pictures/swanson-balance-b-100-complex.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pictures/swanson-vitamin-c-complex.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/crud_functions.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database.db" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/registration.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/exa_key.py" beforeDir="false" afterPath="$PROJECT_DIR$/exa_key.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/inline_key.py" beforeDir="false" afterPath="$PROJECT_DIR$/inline_key.py" afterDir="false" />
@@ -52,6 +52,7 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;Python.crud_functions.executor&quot;: &quot;Run&quot;,
     &quot;Python.main.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
@@ -154,8 +155,19 @@
       <option name="project" value="LOCAL" />
       <updated>1727026228793</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="work">
+      <option name="closed" value="true" />
+      <created>1727522709425</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1727522709425</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.db" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="work" />
